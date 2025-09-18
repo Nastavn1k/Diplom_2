@@ -32,10 +32,17 @@ public class LoginUserTest {
     }
 
     @Test
-    public void authorizationWithIncorrectDataUserTest() {
-        Response responseAfterAuthorizationWithIncorrectDataUser =
-                authorizationWithIncorrectDataUser();
-        checkAuthorizationWithIncorrectDataUser(responseAfterAuthorizationWithIncorrectDataUser);
+    public void authorizationWithIncorrectEmailTest() {
+        Response responseAfterAuthorizationWithIncorrectEmail =
+                authorizationWithIncorrectEmail();
+        checkAuthorizationWithIncorrectDataUser(responseAfterAuthorizationWithIncorrectEmail);
+    }
+
+    @Test
+    public void authorizationWithIncorrectPasswordTest() {
+        Response responseAfterAuthorizationWithIncorrectPassword =
+                authorizationWithIncorrectPassword();
+        checkAuthorizationWithIncorrectDataUser(responseAfterAuthorizationWithIncorrectPassword);
     }
 
     @After

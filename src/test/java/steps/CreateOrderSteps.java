@@ -31,8 +31,8 @@ public class CreateOrderSteps {
                 .extract().response();
     }
 
-    @Step("Проверка, что заказ авторизированного пользователя прошел успешно")
-    public static void checkCreateOrderWithAuthorization(Response response) {
+    @Step("Проверка, что заказ прошел успешно")
+    public static void checkCreateOrder(Response response) {
         response.then()
                 .statusCode(200)
                 .body("success", equalTo(true));
@@ -53,13 +53,6 @@ public class CreateOrderSteps {
                 .then()
                 .log().all()
                 .extract().response();
-    }
-
-    @Step("Проверка, что заказ неавторизированного пользователя прошел успешно")
-    public static void checkCreateOrderWithoutAuthorization(Response response) {
-        response.then()
-                .statusCode(200)
-                .body("success", equalTo(true));
     }
 
     @Step("Создать заказ с авторизацией, без добавления ингредиентов")

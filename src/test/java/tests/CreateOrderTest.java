@@ -31,21 +31,21 @@ public class CreateOrderTest {
     public void createOrderWithAuthorizationTest() {
         response =
                 createOrderWithAuthorization(accessToken);
-        checkCreateOrderWithAuthorization(response);
+        checkCreateOrder(response);
     }
 
     @Test
     public void createOrderWithoutAuthorizationTest() {
         response =
                 createOrderWithoutAuthorization();
-        checkCreateOrderWithoutAuthorization(response);
+        checkCreateOrder(response);
     }
 
     @Test
     public void createOrderWithAuthorizationAndIngredientsTest() {
         response =
                 createOrderWithAuthorization(accessToken);
-        checkCreateOrderWithAuthorization(response);
+        checkCreateOrder(response);
     }
 
     @Test

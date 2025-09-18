@@ -36,11 +36,11 @@ public class LoginUserSteps {
                 .body("success", equalTo(true));
     }
 
-    @Step("Авторизация с применением неверных данных пользователя")
-    public static Response authorizationWithIncorrectDataUser() {
+    @Step("Авторизация с применением неверного email")
+    public static Response authorizationWithIncorrectEmail() {
         AuthorizationModel authorizationModel = new AuthorizationModel()
                 .setEmail(getRandomEmail())
-                .setPassword(getRandomPassword());
+                .setPassword(RANDOM_PASSWORD);
 
         return given()
                 .log().all()
@@ -58,5 +58,21 @@ public class LoginUserSteps {
                 .statusCode(401)
                 .body("success", equalTo(false))
                 .body("message", equalTo("email or password are incorrect"));
+    }
+
+    @Step("Авторизация с применением неверного password")
+    public static Response authorizationWithIncorrectPassword() {
+        AuthorizationModel authorizationModel = new AuthorizationModel()
+                .setEmail(RANDOM_EMAIL)
+                .setPassword(getRandomPassword());
+
+        return given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(authorizationModel)
+                .when()
+                .post(PATH_LOGIN_USER)
+                .then()
+                .extract().response();
     }
 }

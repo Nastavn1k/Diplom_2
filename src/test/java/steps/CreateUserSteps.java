@@ -62,11 +62,45 @@ public class CreateUserSteps {
                 .extract().response();
     }
 
-    @Step("Проверка, что пользователь  без указания email в системе не зарегистрирован")
-    public static void checkStatusAfterRegistrationWithoutEmail(Response response) {
+    @Step("Проверка, что пользователь  без указания одного из обязательных полей в системе не зарегистрирован")
+    public static void checkStatusAfterRegistrationWithoutRequiredField(Response response) {
         response.then()
                 .statusCode(403)
                 .body("success", equalTo(false))
                 .body("message", equalTo("Email, password and name are required fields"));
+    }
+
+    @Step("Создание нового пользователя без обязательного поля password")
+    public static Response createNewUserWithoutPassword() {
+        UserModel userModel = new UserModel()
+                .setEmail(RANDOM_EMAIL)
+                .setPassword(null)
+                .setName(RANDOM_NAME);
+
+        return given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(userModel)
+                .when()
+                .post(PATH_CREATE_USER)
+                .then()
+                .extract().response();
+    }
+
+    @Step("Создание нового пользователя без обязательного поля name")
+    public static Response createNewUserWithoutName() {
+        UserModel userModel = new UserModel()
+                .setEmail(RANDOM_EMAIL)
+                .setPassword(RANDOM_NAME)
+                .setName(null);
+
+        return given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(userModel)
+                .when()
+                .post(PATH_CREATE_USER)
+                .then()
+                .extract().response();
     }
 }

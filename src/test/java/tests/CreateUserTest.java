@@ -39,7 +39,21 @@ public class CreateUserTest {
     public void createNewUserWithoutEmailTest() {
         response =
                 createNewUserWithoutEmail();
-        checkStatusAfterRegistrationWithoutEmail(response);
+        checkStatusAfterRegistrationWithoutRequiredField(response);
+    }
+
+    @Test
+    public void createNewUserWithoutPasswordTest() {
+        response =
+                createNewUserWithoutPassword();
+        checkStatusAfterRegistrationWithoutRequiredField(response);
+    }
+
+    @Test
+    public void createNewUserWithoutNameTest() {
+        response =
+                createNewUserWithoutName();
+        checkStatusAfterRegistrationWithoutRequiredField(response);
     }
 
     @After
